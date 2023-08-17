@@ -1,6 +1,5 @@
 import React from "react"
 import { useNavigate } from "react-router-dom";
-
 import axios from "axios"
 
 export default function Form(props){
@@ -24,42 +23,46 @@ export default function Form(props){
     // used for conditional rendering of failed login message
     const[failedLogin, setFailedLogin] = React.useState(null)
 
-
     // verifies login information with database, returns and stores a JWT on success
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-          const response = await axios.post('http://localhost:3001/api/login', formData);
-    
-          if (response.status === 200) {
+            let response = await axios.post('http://localhost:3001/api/login', formData);
+        
             // store JWT
             const token = response.data.accessToken
             localStorage.setItem('token', token)
+
+            // store user information in state
+            console.log(response.data)
+            props.setAccount(response.data)
+
             // let navigation bar know we are logged in
             props.setIsLoggedIn(true)
             console.log('Form submitted successfully');
             setFailedLogin(null)
-            //redirect user to home page
-            navigate('/login')
-          } else {
-            console.error('Form submission failed');
-            setFailedLogin("show")
 
-          }
-        } catch (error) {
-          console.error('An error occurred', error);
+            //redirect user to home page
+            navigate('/')
+
+        }catch (error) {
+            if (error.response.status === 401){
+                setFailedLogin("show")
+            }
+            else{
+                console.error('An error occurred', error);
+            }
         }
-        console.log(failedLogin)
     };
 
-
     //used to redirect user after a login
-     const navigate = useNavigate()
-    
+    const navigate = useNavigate()
     return(
+
         <form className="login--form" onSubmit={handleSubmit}>
+            <h1 className="login--header"> Login</h1>
             <input
-                className="input--email"
+                className="input--login"
                 type="text"
                 placeholder="Username"
                 onChange={handleChange}
@@ -67,7 +70,7 @@ export default function Form(props){
                 value={formData.username}
             />
             <input
-                className="input--password"
+                className="input--login"
                 type="text"
                 placeholder="Password"
                 onChange={handleChange}
@@ -75,9 +78,14 @@ export default function Form(props){
                 value={formData.password}
             />
             {failedLogin === "show" && (
-                <h3 className="login--failureMessage">Invalid credentials.Please try again</h3>
+                <h3 className="login--failure">
+                    Invalid credentials or email not registered. Please try again or create an account
+                </h3>
             )}
-            <button>Submit</button>
+            <div className="login--button-container">
+                <button className="login--submit">Submit</button>
+            </div>
+            
         </form>
     )
 }

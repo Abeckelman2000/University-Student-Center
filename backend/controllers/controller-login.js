@@ -19,27 +19,44 @@ const postLogin = async (req, res) =>{
     }
   })
 
-   const user = listStudents.find(user => user.username === req.body.username)
-   if(user == null){
-     res.status(404).send('Invalid credentials or email not registered. Please try again or create an account')
-   }
-   else{
-     console.log('User exists in the database, continuing verification...')
-   }
+  // empty input fields
+  if(!req.body.username || !req.body.password){
+    return res.status(401).send("Invalid credentials or account does not exist")
+  }
 
-   console.log(user)
+  const user = listStudents.find(user => user.username === req.body.username)
+  if(user == null){
+    return res.status(401).send("Invalid credentials or account does not exist")
+  }
+  else{
+      console.log('User exists in the database, continuing verification...')
 
-   try{
-    bcrypt.compare(req.body.password, user.password)
-    //res.status(200).send("Password decrypted and verified. Logging in")
-   }
-   catch{
-     res.status(500).send('Internal server error')    // status 500: Internal server error
-   }
+      try{
+        const passwordMatch = await bcrypt.compare(req.body.password, user.password)
+        if(!passwordMatch){
+          return res.status(401).send("Invalid credentials")
+        }
+    
+        //serializing user with JSON webtokens
+        const accessToken = generateToken({username: user.username})
+        res.json({
+          username: user.username,
+          password: user.password,
+          FirstName: user.FirstName,
+          LastName: user.LastName,
+          studentID: user.studentID,
+          accessToken: accessToken
+        })
+      }
+      catch{
+        res.status(500).send('Internal server error')    // status 500: Internal server error
+      }
+  }
 
-   //serializing user with JSON webtokens
-   const accessToken = generateToken({username: user.username})
-   res.json({accessToken: accessToken})
+  console.log(user)
+
+   
+
 }
 
 

@@ -1,13 +1,10 @@
 import React from "react"
-import Navbar from "./Navbar"
-import Form from "./Form"
+import FormLogin from "./FormLogin"
 export default function Login(props){
     return(
         <>
-        <Navbar/>
-        <h1 className="login--header"> Login</h1>
         <body className="login--body">
-            <Form setIsLoggedIn={props.setIsLoggedIn}/>
+            <FormLogin setIsLoggedIn={props.setIsLoggedIn} setAccount={props.setAccount}/>
         </body>
         
 

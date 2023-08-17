@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 const login = require('./routes/router-login')
 const createAccount = require('./routes/router-create-account')
 const profile = require(`./routes/router-profile`)
+const verifyJWT = require(`./routes/router-verify-token`)
 const cors = require('cors')
 
 
@@ -29,6 +30,7 @@ app.use(cors({
 app.use(`/api/login`, login)
 app.use(`/api/createaccount`, createAccount)
 app.use(`/profile`, profile)
+app.use(`/api/verify-token`, verifyJWT)
 
 
 app.listen(3001, ()=>{

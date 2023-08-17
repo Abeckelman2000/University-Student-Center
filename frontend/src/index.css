@@ -1,96 +1,181 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-
-.navbar{
+.navbar {
   display: flex;
   align-items: center;
-  background-color:#1f8251;
-  height: 100px;
+  background-color: #1f8251;
+  height: 10px;
   padding: 30px 25px;
-} 
+}
 
-.nav--icon{
-  height: 100px; 
+.nav--iconlink {
+  cursor: pointer;
+}
+
+.nav--icon {
+  height: 50px;
   display: flex;
-  width:auto;
-  justify-content:flex-start;
-  
+  width: auto;
+  justify-content: flex-start;
 }
 
 .nav--list {
   flex-grow: 1;
   display: flex;
   justify-content: flex-end;
-  font-size: 30px;
+  font-size: 20px;
   align-items: center;
+  list-style: none;
 }
 
-.nav--list > li {
-  justify-content:flex-end;
-  list-style: none;
+.nav--listelem {
+  justify-content: flex-end;
 }
 
 .icon--home,
 .icon--login,
-.icon--profile{
-  width:50px;
-  height: 50px;
-  margin-right:5px;
+.icon--signup,
+.icon--studentcenter,
+.icon--profile {
+  width: 35px;
+  height: 35px;
+  margin-right: 5px;
 }
 
 .link--home,
 .link--login,
-.link--profile{
-  color:yellow;
+.link--signup,
+.link--studentcenter,
+.link--profile,
+.nav--logout {
+  color: white;
   text-decoration: none;
+  list-style: none;
+  margin-right: 20px;
+  cursor: pointer;
 }
 
-
-.login--header{
-  text-align: center;
-  background-color: #145032;
-  margin: 0;
-  padding: 0;
-}
-
-.login--form{
+.signup--form,
+.login--form {
   background-color: gold;
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px;
   width: 300px;
-  margin: 0 auto; /* Center horizontally */
+  margin: 0 auto;
 }
 
-.login--form{
+.create.login--form {
   display: flex;
-  flex-direction: column; /* Stacks the input boxes vertically */
+  flex-direction: column;
   align-items: center;
-  height: 200px; /* Adjust height as needed */
+  height: 400px;
+  width: 400px;
   justify-content: center;
 }
-.input--email,
-.input--password{
+
+.input--signup,
+.input--login {
   display: block;
-  width: 100%; /* Make the input boxes full width */
-  margin-bottom: 10px; /* Add some vertical spacing between the input boxes */
-  border-radius: 15px;
+  width: 100%;
+  margin-bottom: 10px;
   text-align: center;
   font-size: 20px;
 }
 
-.login--failure{
-  font-size:15px;
+.signup--header,
+.login--header,
+.login--button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.login--submit {
+  width: 50%;
+  height: 30px;
+  border-radius: 10px;
+}
+
+.login--failure {
+  font-size: 20px;
+  color: red;
+  text-align: center;
+}
+
+.home-welcome {
+  text-align: center;
+}
+
+.signup--body {
+  text-align: center;
+}
+
+.studcenternav--container {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(242, 237, 237);
+  color: black;
+  width: 10%;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.studentcenternav--list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.studentcenternav--item {
+  position: relative;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  font-size: 20px;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 0px;
+  margin: 0px;
+  width: 150px;
+  z-index: 1;
+  list-style: none;
+}
+
+.dropdownmenu--item{
+  list-style: none;
+  text-decoration: none;
+  padding: 5px;
+  font-size: 18px;
+
+}
+
+.dropdownmenu--link{
+  text-decoration: none;
+  color:black;
+  padding:5px;
+}
+.studentcenternav--image {
+  width: 40px;
+}
+
+.studentcenternav--link {
+  display: block;
+  text-decoration: none;
 }
